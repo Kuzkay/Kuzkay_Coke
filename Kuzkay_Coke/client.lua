@@ -178,8 +178,8 @@ AddEventHandler('KCoke:new', function(id)
 	
 	local u, Z = GetGroundZFor_3dCoord(rnX ,rnY ,300.0,0)
 	
-	locations[id].x = Config.PickupBlip.x + rnX
-	locations[id].y = Config.PickupBlip.y + rnY
+	locations[id].x = rnX
+	locations[id].y = rnY
 	locations[id].z = Z + 0.3
 
 end)
