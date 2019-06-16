@@ -173,8 +173,9 @@ AddEventHandler('KCoke:new', function(id)
 	local set = false
 	Citizen.Wait(10)
 	
-	local rnX = math.random(-35, 35)
-	local rnY = math.random(-35, 35)
+	
+	local rnX = Config.PickupBlip.x + math.random(-35, 35)
+	local rnY = Config.PickupBlip.y + math.random(-35, 35)
 	
 	local u, Z = GetGroundZFor_3dCoord(rnX ,rnY ,300.0,0)
 	
