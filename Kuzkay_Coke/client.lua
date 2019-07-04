@@ -27,20 +27,34 @@ local Keys = {
 	["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
 	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
-
+local spawned = false
 Citizen.CreateThread( function()
 Citizen.Wait(10000)
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
-TriggerEvent('KCoke:start')
+while true do
+Citizen.Wait(1000)
+	if GetDistanceBetweenCoords(Config.PickupBlip.x,Config.PickupBlip.y,Config.PickupBlip.z, GetEntityCoords(GetPlayerPed(-1))) <= 200 then
+		if spawned == false then
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+			TriggerEvent('KCoke:start')
+		end
+		spawned = true
+	else
+		if spawned then
+			locations = {}
+		end
+		spawned = false
+		
+	end
+end
 end)
 
 
@@ -80,7 +94,7 @@ Citizen.CreateThread(function()
 				if GetDistanceBetweenCoords(locations[k].x, locations[k].y, locations[k].z, GetEntityCoords(GetPlayerPed(-1))) < 150 then			
 					DrawMarker(3, locations[k].x, locations[k].y, locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0, 200, 0, 110, 0, 1, 0, 0)	
 					
-					if GetDistanceBetweenCoords(locations[k].x, locations[k].y, locations[k].z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then			
+					if GetDistanceBetweenCoords(locations[k].x, locations[k].y, locations[k].z, GetEntityCoords(GetPlayerPed(-1)), false) < 2 then			
 						TriggerServerEvent('KCoke:get')
 						TriggerEvent('KCoke:new', k)
 					end
@@ -92,12 +106,13 @@ Citizen.CreateThread(function()
 					DrawMarker(1, Config.Processing.x, Config.Processing.y, Config.Processing.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3, 1.3, 1.0, 0, 200, 0, 110, 0, 1, 0, 0)	
 					if GetDistanceBetweenCoords(Config.Processing.x, Config.Processing.y, Config.Processing.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then			
 						Draw3DText( Config.Processing.x, Config.Processing.y, Config.Processing.z , "~w~Cocaine Production~y~\nPress [~b~E~y~] to start processing",4,0.15,0.1)
-					end
-					if IsControlJustReleased(0, Keys['E']) then
+						if IsControlJustReleased(0, Keys['E']) then
 							Citizen.CreateThread(function()
 								Process()
 							end)
 						end
+					end
+					
 					if GetDistanceBetweenCoords(Config.Processing.x, Config.Processing.y, Config.Processing.z, GetEntityCoords(GetPlayerPed(-1)), true) < 5 and GetDistanceBetweenCoords(Config.Processing.x, Config.Processing.y, Config.Processing.z, GetEntityCoords(GetPlayerPed(-1)), true) > 3 then
 						process = false
 					end
