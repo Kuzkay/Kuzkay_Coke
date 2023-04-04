@@ -106,7 +106,7 @@ Citizen.CreateThread(function()
 					DrawMarker(1, Config.Processing.x, Config.Processing.y, Config.Processing.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3, 1.3, 1.0, 0, 200, 0, 110, 0, 1, 0, 0)	
 					if GetDistanceBetweenCoords(Config.Processing.x, Config.Processing.y, Config.Processing.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then			
 						Draw3DText( Config.Processing.x, Config.Processing.y, Config.Processing.z , "~w~Cocaine Production~y~\nPress [~b~E~y~] to start processing",4,0.15,0.1)
-						if IsControlJustReleased(0, Keys['E']) then
+						if IsControlJustReleased(0, Keys['E']) and not process then
 							Citizen.CreateThread(function()
 								Process()
 							end)
