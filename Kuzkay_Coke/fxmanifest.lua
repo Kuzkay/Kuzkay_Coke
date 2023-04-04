@@ -1,7 +1,9 @@
-print("Kuzkay_Coke has successfully started. Enjoy!")
+fx_version 'adamant'
+game 'gta5'
 
 client_scripts {
   'config.lua',
   'client.lua'
 }
+
 server_script "server.lua"
