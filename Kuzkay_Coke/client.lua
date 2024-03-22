@@ -1,18 +1,4 @@
-
-
-ESX = nil
-Citizen.CreateThread(function()
-	while true do
-		Wait(5)
-		if ESX ~= nil then
-		
-		else
-			ESX = nil
-			TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		end
-	end
-end)
-
+ESX = exports["es_extended"]:getSharedObject()
 local locations = {}
 
 
